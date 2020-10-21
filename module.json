@@ -1,0 +1,12 @@
+{
+  "id": "randomizeWordWallsPatcher",
+  "name": "Randomize Word Walls Patcher",
+  "author": "ChrRubin",
+  "version": "1.0",
+  "released": "10/21/2020",
+  "updated": "10/21/2020",
+  "description": "Randomizes the dragon shouts you receive from word walls.",
+  "requires": ["unifiedPatchingFramework"],
+  "moduleLoader": "UPF",
+  "canHotLoad": true
+}

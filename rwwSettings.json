@@ -1,0 +1,46 @@
+{
+    "wordWallTriggers": [
+        {
+            "pluginName": "Skyrim.esm",
+            "triggerID": "05095E"
+        },
+        {
+            "pluginName": "Dawnguard.esm",
+            "triggerID": "0153DE"
+        },
+        {
+            "pluginName": "Dragonborn.esm",
+            "triggerID": "027431"
+        }
+    ],
+    "blacklist": [
+        {
+            "pluginName": "Skyrim.esm",
+            "refrs": [
+                "0709D2",
+                "0709F6",
+                "084824",
+                "08A1E8",
+                "0A9D81"
+            ]
+        },
+        {
+            "pluginName": "Dawnguard.esm",
+            "refrs": [
+                "0153DF"
+            ]
+        },
+        {
+            "pluginName": "Dragonborn.esm",
+            "refrs": [
+                "02733F"
+            ]
+        },
+        {
+            "pluginName": "Serio's Enhanced Dragons.esp",
+            "refrs": [
+                "192DF6"
+            ]
+        }
+    ]
+}
