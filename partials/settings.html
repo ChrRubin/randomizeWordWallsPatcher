@@ -5,8 +5,11 @@
 </section>
 
 <section>
-    <div style="margin: auto;">
-        <input type="checkbox" ng-model="settings.randomizeWordWallsPatcher.setEsl"/>
-        <span class="input-label">Flag as ESL</label>
+    <div style="margin: auto;" title="When enabled, the patcher will dynamically check your load order for Word Walls to randomize. This process can be VERY SLOW as zEdit has to build references to your loaded plugins, but it can randomize Word Walls that are not hardcoded.">
+        <label><input type="checkbox" ng-model="settings.randomizeWordWallsPatcher.isDynamic">Use dynamic patching (VERY SLOW)</label>
     </div>
+</section>
+
+<section>
+    <label><input type="checkbox" ng-model="settings.randomizeWordWallsPatcher.setEsl">Flag as ESL</label>
 </section>

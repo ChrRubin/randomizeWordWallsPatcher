@@ -1,5 +1,5 @@
 {
-    "wordWallTriggers": [
+    "dynamicWordWallTriggers": [
         {
             "pluginName": "Skyrim.esm",
             "triggerID": "05095E"
@@ -13,7 +13,7 @@
             "triggerID": "027431"
         }
     ],
-    "blacklist": [
+    "dynamicBlacklist": [
         {
             "pluginName": "Skyrim.esm",
             "refrs": [
@@ -40,6 +40,92 @@
             "pluginName": "Serio's Enhanced Dragons.esp",
             "refrs": [
                 "192DF6"
+            ]
+        }
+    ],
+    "hardcodedWalls": [
+        {
+            "pluginName": "Skyrim.esm",
+            "refrs": [
+                "05B5CE",
+                "0709DE",
+                "0709EA",
+                "070A02",
+                "070A0E",
+                "070A1A",
+                "070A32",
+                "070A3E",
+                "070A4A",
+                "070A56",
+                "070A62",
+                "070A6E",
+                "070A7A",
+                "070A86",
+                "070A92",
+                "070A9E",
+                "070AAA",
+                "070AB6",
+                "070AC2",
+                "070AF4",
+                "070B02",
+                "070B0E",
+                "070B1A",
+                "070B26",
+                "070B32",
+                "070B3E",
+                "070B4A",
+                "070B56",
+                "070B62",
+                "070B6D",
+                "070B85",
+                "071010",
+                "0A7402",
+                "0D0E3D",
+                "0D2348",
+                "0D9F3D",
+                "0F5E9F",
+                "0F7229",
+                "0F7235",
+                "0F7241",
+                "104323"
+            ]
+        },
+        {
+            "pluginName": "Dawnguard.esm",
+            "refrs": [
+                "0153D9",
+                "0153EB",
+                "0168FE"
+            ]
+        },
+        {
+            "pluginName": "Dragonborn.esm",
+            "refrs": [
+                "0339C2",
+                "027457",
+                "027464",
+                "027471",
+                "02747D",
+                "02AA28",
+                "02AA34",
+                "02AA40",
+                "0340B1"
+            ]
+        },
+        {
+            "pluginName": "Falskaar.esm",
+            "refrs": [
+                "0D3840",
+                "16A880",
+                "1887E3"
+            ]
+        },
+        {
+            "pluginName": "Wyrmstooth.esp",
+            "refrs": [
+                "30C92B",
+                "30C931",
+                "30C93D"
             ]
         }
     ]
