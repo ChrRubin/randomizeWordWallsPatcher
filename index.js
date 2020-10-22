@@ -142,7 +142,7 @@ registerPatcher({
     info: info,
     gameModes: [xelib.gmSSE, xelib.gmTES5],
     settings: {
-        label: 'Randomize Word Walls Patcher',
+        label: 'Word Wall Randomizer',
         templateUrl: `${patcherUrl}/partials/settings.html`,
         defaultSettings: {
             isDynamic: false,
