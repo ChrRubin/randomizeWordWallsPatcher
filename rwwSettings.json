@@ -127,6 +127,54 @@
                 "30C931",
                 "30C93D"
             ]
+        },
+        {
+            "pluginName": "Word Walls Relocated- Merged.esp",
+            "refrs": [
+                "00609C",
+                "006B6C",
+                "0070DA",
+                "00810B",
+                "008BDD",
+                "009C1C",
+                "00A18B",
+                "00AC5C",
+                "01CB07",
+                "011E00",
+                "02335E",
+                "0150A1",
+                "0150AD",
+                "017F9B"
+            ]
+        },
+        {
+            "pluginName": "Word Walls Relocated- Base game.esp",
+            "refrs": [
+                "00609C",
+                "006B6C",
+                "0070DA",
+                "00810B",
+                "008BDD",
+                "009C1C",
+                "00A18B",
+                "00AC5C",
+                "01CB07"
+            ]
+        },
+        {
+            "pluginName": "Word Walls Relocated- Dawnguard.esp",
+            "refrs": [
+                "011E00",
+                "02335E"
+            ]
+        },
+        {
+            "pluginName": "Word Walls Relocated- Dragonborn.esp",
+            "refrs": [
+                "0150A1",
+                "0150AD",
+                "017F9B"
+            ]
         }
     ]
 }

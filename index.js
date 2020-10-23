@@ -288,16 +288,24 @@ registerPatcher({
                     wallRefrs = [...locals.hardcodedWalls];
                 }
 
-                // Get remove duplicates and get winning overrides
+                // Get winning overrides, remove duplicates, remove disabled walls
                 let filteredID = [];
-                let processedWallRefrs = wallRefrs.filter(wordWall => {
-                    const formid = xelib.GetHexFormID(wordWall);
-                    if (filteredID.includes(formid)) {
-                        return false;
-                    }
-                    filteredID.push(formid);
-                    return true;
-                }).map(wordWall => xelib.GetWinningOverride(wordWall));
+                let processedWallRefrs = wallRefrs
+                    .map(wordWall => xelib.GetWinningOverride(wordWall))
+                    .filter(wordWall => {
+                        const formid = xelib.GetHexFormID(wordWall);
+                        if (filteredID.includes(formid)) {
+                            return false;
+                        }
+                        
+                        filteredID.push(formid);
+
+                        if (xelib.GetRecordFlag(wordWall, "Initially Disabled")){
+                            return false;
+                        }
+
+                        return true;
+                    });
 
                 locals.wordWallRefsShuffled = shuffleArray(processedWallRefrs);
                 locals.indexCount = 0;
