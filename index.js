@@ -1,3 +1,8 @@
+/**
+ * @license MIT
+ * Copyright (C) 2020 ChrRubin
+ */
+
 /* global info, xelib, registerPatcher, patcherUrl, fh, patcherPath */
 
 const rwwSettingsPath = `${patcherPath}\\rwwSettings.json`;
@@ -297,7 +302,7 @@ registerPatcher({
                         if (filteredID.includes(formid)) {
                             return false;
                         }
-                        
+
                         filteredID.push(formid);
 
                         if (xelib.GetRecordFlag(wordWall, "Initially Disabled")){
