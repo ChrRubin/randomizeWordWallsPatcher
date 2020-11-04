@@ -1,15 +1,20 @@
 <h2>Word Walls Randomizer</h2>
 
 <section>
+    <h3>Ignore Plugins</h3>
     <ignore-plugins patcher-id="randomizeWordWallsPatcher"></ignore-plugins>
 </section>
 
+<hr>
 <section>
+    <h3>Randomizer Settings</h3>
     <div style="margin: auto;" title="When enabled, the patcher will dynamically check your load order for Word Walls to randomize. This process can be VERY SLOW as zEdit has to build references to your loaded plugins, but it can randomize Word Walls that are not hardcoded.">
         <label><input type="checkbox" ng-model="settings.randomizeWordWallsPatcher.isDynamic">Use dynamic patching (VERY SLOW)</label>
     </div>
 </section>
 
+<hr>
 <section>
+    <h3>Misc Settings</h3>
     <label><input type="checkbox" ng-model="settings.randomizeWordWallsPatcher.setEsl">Flag as ESL</label>
 </section>

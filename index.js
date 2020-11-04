@@ -1,6 +1,9 @@
 /**
+ * @file zEdit Patcher - Randomizes the dragon shouts you receive from word walls.
+ * @author ChrRubin
+ * @version 1.0.1
  * @license MIT
- * Copyright (C) 2020 ChrRubin
+ * @copyright ChrRubin 2020
  */
 
 /* global info, xelib, registerPatcher, patcherUrl, fh, patcherPath */
@@ -50,7 +53,7 @@ class WordWallRefr {
         this.myWord03Value = this.getScriptPropertyValue(this.myWord03);
         this.shoutGlobalValue = this.getScriptPropertyValue(this.shoutGlobal);
 
-        let cell = xelib.GetLinksTo(this.handle, "Cell");
+        const cell = xelib.GetLinksTo(this.handle, "Cell");
         if (!cell) {
             this.cellName = "";
         }
@@ -67,7 +70,7 @@ class WordWallRefr {
         const valuePath1 = "Value\\Object Union\\Object v1\\FormID";
         const valuePath2 = "Value\\Object Union\\Object v2\\FormID";
 
-        let value = xelib.GetElement(scriptProperty, valuePath1);
+        const value = xelib.GetElement(scriptProperty, valuePath1);
         if (value) {
             return value;
         }
@@ -133,7 +136,7 @@ function getPluginForJsonLoad(pluginName, loadDesc, ignoredFiles, helpers) {
         }
     }
 
-    let file = xelib.FileByName(pluginName);
+    const file = xelib.FileByName(pluginName);
     if (!file) {
         helpers.logMessage(`${pluginName} not found. Skipping its ${loadDesc}...`);
         return 0;
@@ -161,7 +164,7 @@ registerPatcher({
                 throw new ChrCustomError("Unable to find settings.json!");
             }
 
-            let settingsJson = fh.loadJsonFile(rwwSettingsPath);
+            const settingsJson = fh.loadJsonFile(rwwSettingsPath);
             if (!validateObject(settingsJson, "dynamicWordWallTriggers", "dynamicBlacklist", "hardcodedWalls")) {
                 throw new ChrCustomError("Invalid settings.json at root!");
             }
@@ -176,14 +179,14 @@ registerPatcher({
                 helpers.logMessage("Loading hardcoded word walls...");
                 locals.hardcodedPlugins = [];
                 locals.hardcodedWalls = [];
-                let hardCodedWallIDs = [];
+                const hardCodedWallIDs = [];
 
                 settingsJson.hardcodedWalls.forEach(hardcodeData => {
                     if (!validateObject(hardcodeData, "pluginName", "refrs")) {
                         throw new ChrCustomError("Invalid settings.json at hardcodedWalls!");
                     }
 
-                    let file = getPluginForJsonLoad(hardcodeData.pluginName, "hardcoded walls", settings.ignoredFiles, helpers);
+                    const file = getPluginForJsonLoad(hardcodeData.pluginName, "hardcoded walls", settings.ignoredFiles, helpers);
                     if (!file) {
                         return;
                     }
@@ -194,7 +197,7 @@ registerPatcher({
                     hardcodeData.refrs.forEach(refr => {
                         const formid = expandShortFormID(file, refr);
                         hardCodedWallIDs.push(formid);
-                        let handle = xelib.GetElement(file, formid);
+                        const handle = xelib.GetElement(file, formid);
                         if (!handle) {
                             throw new ChrCustomError(`Unable to load ${formid}!`);
                         }
@@ -209,21 +212,21 @@ registerPatcher({
             else {
                 helpers.logMessage("Loading Word Wall Triggers...");
                 locals.wordWallTriggers = [];
-                let wordWallTriggerIDs = [];
+                const wordWallTriggerIDs = [];
 
                 settingsJson.dynamicWordWallTriggers.forEach(triggerData => {
                     if (!validateObject(triggerData, "pluginName", "triggerID")) {
                         throw new ChrCustomError("Invalid settings.json at wordWallTriggers!");
                     }
 
-                    let file = getPluginForJsonLoad(triggerData.pluginName, "triggers", settings.ignoredFiles, helpers);
+                    const file = getPluginForJsonLoad(triggerData.pluginName, "triggers", settings.ignoredFiles, helpers);
                     if (!file) {
                         return;
                     }
 
                     const formid = expandShortFormID(file, triggerData.triggerID);
                     wordWallTriggerIDs.push(formid);
-                    let handle = xelib.GetElement(file, formid);
+                    const handle = xelib.GetElement(file, formid);
                     if (!handle) {
                         throw new ChrCustomError(`Unable to load ${formid}!`);
                     }
@@ -242,7 +245,7 @@ registerPatcher({
                         throw new ChrCustomError("Invalid settings.json at blacklist!");
                     }
 
-                    let file = getPluginForJsonLoad(blacklistData.pluginName, "blacklist", settings.ignoredFiles, helpers);
+                    const file = getPluginForJsonLoad(blacklistData.pluginName, "blacklist", settings.ignoredFiles, helpers);
                     if (!file) {
                         return;
                     }
@@ -271,7 +274,7 @@ registerPatcher({
                 if (settings.isDynamic) {
                     helpers.logMessage("Dynamically getting references to Word Wall Triggers...");
                     locals.wordWallTriggers.forEach(acti => {
-                        let refs = xelib.GetReferencedBy(acti);
+                        const refs = xelib.GetReferencedBy(acti);
                         refs.forEach(refr => {
                             // Skip references that are not REFR
                             if (xelib.Signature(refr) !== "REFR") {
@@ -294,8 +297,8 @@ registerPatcher({
                 }
 
                 // Get winning overrides, remove duplicates, remove disabled walls
-                let filteredID = [];
-                let processedWallRefrs = wallRefrs
+                const filteredID = [];
+                const processedWallRefrs = wallRefrs
                     .map(wordWall => xelib.GetWinningOverride(wordWall))
                     .filter(wordWall => {
                         const formid = xelib.GetHexFormID(wordWall);
@@ -321,8 +324,8 @@ registerPatcher({
                 const formid = xelib.GetHexFormID(record);
                 helpers.logMessage(`Patching ${formid}...`);
 
-                let wallCopyFrom = new WordWallRefr(locals.wordWallRefsShuffled[locals.indexCount]);
-                let wallCopyTo = new WordWallRefr(record);
+                const wallCopyFrom = new WordWallRefr(locals.wordWallRefsShuffled[locals.indexCount]);
+                const wallCopyTo = new WordWallRefr(record);
 
                 locals.outputArray.push("==============================");
                 locals.outputArray.push(`REFR: ${formid}`);
