@@ -4,7 +4,7 @@
   "author": "ChrRubin",
   "version": "1.0.1",
   "released": "10/24/2020",
-  "updated": "11/04/2020",
+  "updated": "11/10/2020",
   "description": "Randomizes the dragon shouts you receive from word walls.",
   "requires": ["unifiedPatchingFramework"],
   "moduleLoader": "UPF",

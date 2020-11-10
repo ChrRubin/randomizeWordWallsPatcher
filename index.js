@@ -152,9 +152,19 @@ registerPatcher({
     settings: {
         label: 'Word Wall Randomizer',
         templateUrl: `${patcherUrl}/partials/settings.html`,
+        controller: function($scope) {
+            $scope.showRecentLog = () => {
+                if (!fh.jetpack.exists(rwwLogPath)){
+                    alert("Log file does not exist!");
+                    return;
+                }
+                fh.openFile(rwwLogPath);
+            };
+        },
         defaultSettings: {
             isDynamic: false,
             setEsl: true,
+            showLog: false,
             patchFileName: 'RandomWordWallsPatch.esp'
         }
     },
@@ -169,7 +179,10 @@ registerPatcher({
                 throw new ChrCustomError("Invalid settings.json at root!");
             }
 
-            locals.outputArray = []; // Stores output log strings
+            // Stores output log strings
+            locals.outputArray = [];
+
+            locals.outputArray.push(`${new Date().toString()}\n`);
 
             const settingsLog = `PATCHER SETTINGS:\nIgnored files: ${settings.ignoredFiles.join(", ")}\nisDynamic: ${settings.isDynamic}\nsetEsl: ${settings.setEsl}\npatchFileName: ${settings.patchFileName}`;
             helpers.logMessage(settingsLog);
@@ -327,7 +340,7 @@ registerPatcher({
                 const wallCopyFrom = new WordWallRefr(locals.wordWallRefsShuffled[locals.indexCount]);
                 const wallCopyTo = new WordWallRefr(record);
 
-                locals.outputArray.push("==============================");
+                locals.outputArray.push("\n==============================");
                 locals.outputArray.push(`REFR: ${formid}`);
                 locals.outputArray.push(`At cell: ${wallCopyTo.cellName}`);
                 locals.outputArray.push(`Original shout: ${xelib.GetValue(wallCopyTo.shoutGlobalValue)}`);
@@ -347,6 +360,11 @@ registerPatcher({
 
             helpers.logMessage(`Saving log file to ${rwwLogPath}`);
             fh.saveTextFile(rwwLogPath, locals.outputArray.join("\n"));
+
+            if(settings.showLog){
+                helpers.logMessage("Opening log file...");
+                fh.openFile(rwwLogPath);
+            }
         }
     })
 });
