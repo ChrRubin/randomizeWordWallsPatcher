@@ -1,7 +1,7 @@
 /**
  * @file zEdit Patcher - Randomizes the dragon shouts you receive from word walls.
  * @author ChrRubin
- * @version 1.0.1
+ * @version 1.0.2
  * @license MIT
  * @copyright ChrRubin 2020
  */
@@ -152,9 +152,9 @@ registerPatcher({
     settings: {
         label: 'Word Wall Randomizer',
         templateUrl: `${patcherUrl}/partials/settings.html`,
-        controller: function($scope) {
+        controller: function ($scope) {
             $scope.showRecentLog = () => {
-                if (!fh.jetpack.exists(rwwLogPath)){
+                if (!fh.jetpack.exists(rwwLogPath)) {
                     alert("Log file does not exist!");
                     return;
                 }
@@ -190,7 +190,6 @@ registerPatcher({
 
             if (!settings.isDynamic) {
                 helpers.logMessage("Loading hardcoded word walls...");
-                locals.hardcodedPlugins = [];
                 locals.hardcodedWalls = [];
                 const hardCodedWallIDs = [];
 
@@ -205,7 +204,6 @@ registerPatcher({
                     }
 
                     helpers.logMessage(`Loading hardcoded walls for ${hardcodeData.pluginName}...`);
-                    locals.hardcodedPlugins.push(hardcodeData.pluginName);
 
                     hardcodeData.refrs.forEach(refr => {
                         const formid = expandShortFormID(file, refr);
@@ -287,7 +285,7 @@ registerPatcher({
                 if (settings.isDynamic) {
                     helpers.logMessage("Dynamically getting references to Word Wall Triggers...");
                     locals.wordWallTriggers.forEach(acti => {
-                        const refs = xelib.GetReferencedBy(acti);
+                        const refs = xelib.GetReferencedBy(xelib.GetMasterRecord(acti));
                         refs.forEach(refr => {
                             // Skip references that are not REFR
                             if (xelib.Signature(refr) !== "REFR") {
@@ -312,7 +310,7 @@ registerPatcher({
                 // Get winning overrides, remove duplicates, remove disabled walls
                 const filteredID = [];
                 const processedWallRefrs = wallRefrs
-                    .map(wordWall => xelib.GetWinningOverride(wordWall))
+                    .map(wordWall => xelib.GetPreviousOverride(wordWall, patchFile))
                     .filter(wordWall => {
                         const formid = xelib.GetHexFormID(wordWall);
                         if (filteredID.includes(formid)) {
@@ -321,7 +319,7 @@ registerPatcher({
 
                         filteredID.push(formid);
 
-                        if (xelib.GetRecordFlag(wordWall, "Initially Disabled")){
+                        if (xelib.GetRecordFlag(wordWall, "Initially Disabled") || xelib.GetRecordFlag(wordWall, "Deleted")) {
                             return false;
                         }
 
@@ -361,7 +359,7 @@ registerPatcher({
             helpers.logMessage(`Saving log file to ${rwwLogPath}`);
             fh.saveTextFile(rwwLogPath, locals.outputArray.join("\n"));
 
-            if(settings.showLog){
+            if (settings.showLog) {
                 helpers.logMessage("Opening log file...");
                 fh.openFile(rwwLogPath);
             }
